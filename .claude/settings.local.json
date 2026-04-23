@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(java -version)",
+      "Bash(mvn -version)",
+      "Bash(curl -fsSL -o E:/diplom2/.mvn/wrapper/maven-wrapper.jar \"https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/3.3.2/maven-wrapper-3.3.2.jar\")",
+      "Bash(curl -fsSL -o E:/diplom2/mvnw.cmd \"https://raw.githubusercontent.com/apache/maven/master/apache-maven/src/assembly/maven/bin/mvnw.cmd\")",
+      "Bash(curl -fsSL -o E:/diplom2/mvnw \"https://raw.githubusercontent.com/apache/maven/master/apache-maven/src/assembly/maven/bin/mvnw\")",
+      "Bash(curl -fsSL -o E:/diplom2/mvnw.cmd \"https://raw.githubusercontent.com/takari/maven-wrapper/master/mvnw.cmd\")",
+      "Bash(curl -fsSL -o E:/diplom2/mvnw \"https://raw.githubusercontent.com/takari/maven-wrapper/master/mvnw\")",
+      "Bash(cmd.exe /c \"mvnw.cmd -v\")",
+      "Bash(cmd.exe //c \"mvnw.cmd -v 2>&1\")",
+      "PowerShell(& \"E:\\\\diplom2\\\\mvnw.cmd\" -v 2>&1)",
+      "PowerShell(Get-Command java)",
+      "PowerShell($env:JAVA_HOME)",
+      "PowerShell($env:JAVA_HOME = \"C:\\\\Program Files\\\\Eclipse Adoptium\\\\jdk-25.0.2.10-hotspot\"; Set-Location E:\\\\diplom2; & \".\\\\mvnw.cmd\" -q -DskipTests compile 2>&1 | Select-Object -Last 80)",
+      "PowerShell($env:JAVA_HOME = \"C:\\\\Program Files\\\\Eclipse Adoptium\\\\jdk-25.0.2.10-hotspot\"; Set-Location E:\\\\diplom2; & \".\\\\mvnw.cmd\" -q -DskipTests compile 2>&1 | Select-Object -Last 40)",
+      "PowerShell($env:JAVA_HOME = \"C:\\\\Program Files\\\\Eclipse Adoptium\\\\jdk-25.0.2.10-hotspot\"; Set-Location E:\\\\diplom2; $o = & \".\\\\mvnw.cmd\" -DskipTests compile 2>&1; $o | Select-String -Pattern \"BUILD|ERROR\" | Select-Object -Last 20)",
+      "PowerShell($env:JAVA_HOME = \"C:\\\\Program Files\\\\Eclipse Adoptium\\\\jdk-25.0.2.10-hotspot\"; Set-Location E:\\\\diplom2; & \".\\\\mvnw.cmd\" -q -DskipTests package 2>&1 | Select-String -Pattern \"BUILD|ERROR\" | Select-Object -Last 10)",
+      "PowerShell($env:JAVA_HOME = \"C:\\\\Program Files\\\\Eclipse Adoptium\\\\jdk-25.0.2.10-hotspot\"; Set-Location E:\\\\diplom2; $p = Start-Process -FilePath \"$env:JAVA_HOME\\\\bin\\\\java.exe\" -ArgumentList \"-jar\",\"target\\\\bank-accounts-module-1.0.0.jar\" -PassThru -RedirectStandardOutput \"run.log\" -RedirectStandardError \"run.err\" -WindowStyle Hidden; Start-Sleep -Seconds 15; if \\(-not $p.HasExited\\) { Stop-Process -Id $p.Id -Force; Write-Host \"--- RUNNING, KILLED ---\" } else { Write-Host \"--- EXITED code=$\\($p.ExitCode\\) ---\" }; Get-Content run.log -Tail 60; Write-Host \"--- STDERR ---\"; Get-Content run.err -Tail 20)"
+    ]
+  }
+}
