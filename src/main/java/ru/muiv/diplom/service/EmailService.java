@@ -38,7 +38,7 @@ public class EmailService {
                 + "Если вы не запрашивали код — проигнорируйте письмо.\n";
 
         if (stub) {
-            log.warn("[MAIL STUB] На адрес {} должен был уйти OTP: {} (цель: {})", to, code, purposeTitle);
+            log.warn("[MAIL STUB] OTP would be sent to {}: code={} purpose={}", to, code, purposeTitle);
             return;
         }
 
@@ -57,9 +57,9 @@ public class EmailService {
             helper.setSubject(subject);
             helper.setText(text, false);
             mailSender.send(mime);
-            log.info("OTP отправлен на {} (цель: {})", to, purposeTitle);
+            log.info("OTP sent to {} (purpose={})", to, purposeTitle);
         } catch (Exception e) {
-            log.error("Не удалось отправить OTP на {}: {}", to, e.getMessage());
+            log.error("Failed to send OTP to {}: {}", to, e.getMessage());
             throw new IllegalStateException(
                     "Не удалось отправить письмо с кодом: " + e.getMessage(), e);
         }

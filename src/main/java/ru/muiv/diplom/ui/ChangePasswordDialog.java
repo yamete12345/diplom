@@ -37,6 +37,7 @@ public class ChangePasswordDialog extends JDialog {
         addRow(form, c, row++, "Повтор нового:", newPwd2);
 
         JButton submit = new JButton("Сменить");
+        BankTheme.makePrimary(submit);
         submit.addActionListener(e -> doSubmit());
         c.gridx = 0; c.gridy = row; c.gridwidth = 2;
         c.anchor = GridBagConstraints.EAST;

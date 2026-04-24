@@ -11,7 +11,7 @@ import java.util.function.Predicate;
  */
 public class OtpDialog extends JDialog {
 
-    private final JTextField codeField = new JTextField(10);
+    private final JTextField codeField = new JTextField(12);
     private final Predicate<String> verifier;
     private boolean confirmed;
     private boolean submitted;
@@ -23,42 +23,67 @@ public class OtpDialog extends JDialog {
     }
 
     private void buildUi() {
-        setSize(340, 170);
+        setSize(480, 320);
         setLocationRelativeTo(getOwner());
 
-        JPanel panel = new JPanel(new GridBagLayout());
-        panel.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
+        JPanel root = new JPanel(new BorderLayout());
+        root.setBackground(BankTheme.WINDOW_BG);
+
+        JPanel card = new JPanel(new GridBagLayout());
+        card.setBackground(BankTheme.PANEL_BG);
+        card.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(BankTheme.BORDER_LIGHT, 1, true),
+                BorderFactory.createEmptyBorder(24, 32, 24, 32)));
+
         GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(4, 4, 4, 4);
-        c.anchor = GridBagConstraints.WEST;
-
         c.gridx = 0; c.gridy = 0; c.gridwidth = 2;
-        panel.add(new JLabel("На вашу почту отправлен код подтверждения."), c);
+        c.anchor = GridBagConstraints.WEST;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 1;
+        c.insets = new Insets(0, 0, 6, 0);
 
-        c.gridy = 1; c.gridwidth = 1;
-        panel.add(new JLabel("Код:"), c);
-        c.gridx = 1;
-        panel.add(codeField, c);
+        card.add(BankTheme.titleLabel("Код подтверждения"), c);
+
+        c.gridy++;
+        card.add(BankTheme.dimLabel("На вашу почту отправлен 6-значный код."), c);
+
+        c.gridy++; c.insets = new Insets(20, 0, 4, 0);
+        card.add(BankTheme.dimLabel("Код"), c);
+
+        c.gridy++; c.insets = new Insets(0, 0, 6, 0);
+        codeField.setFont(BankTheme.FONT_MONO.deriveFont(18f));
+        card.add(codeField, c);
 
         JButton ok = new JButton("Подтвердить");
-        JButton cancel = new JButton("Отмена");
+        BankTheme.makePrimary(ok);
         ok.addActionListener(e -> submit());
+
+        JButton cancel = new JButton("Отмена");
         cancel.addActionListener(e -> {
             confirmed = false;
             submitted = false;
             dispose();
         });
 
-        JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
+        buttons.setOpaque(false);
         buttons.add(cancel);
         buttons.add(ok);
 
-        c.gridx = 0; c.gridy = 2; c.gridwidth = 2;
+        c.gridy++; c.insets = new Insets(18, 0, 0, 0);
         c.anchor = GridBagConstraints.EAST;
-        panel.add(buttons, c);
+        c.fill = GridBagConstraints.NONE;
+        card.add(buttons, c);
+
+        JPanel center = new JPanel(new GridBagLayout());
+        center.setOpaque(false);
+        center.setBorder(BorderFactory.createEmptyBorder(16, 24, 16, 24));
+        center.add(card);
+
+        root.add(center, BorderLayout.CENTER);
 
         getRootPane().setDefaultButton(ok);
-        setContentPane(panel);
+        setContentPane(root);
     }
 
     private void submit() {
